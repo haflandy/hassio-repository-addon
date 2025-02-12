@@ -7,9 +7,7 @@ url: https://github.com/haflandy/addon-wireguard-client
 arch:
   - aarch64
   - amd64
-  - armhf
   - armv7
-  - i386
 apparmor: true
 host_network: true
 init: false
@@ -26,10 +24,10 @@ map:
   - ssl:rw
 options:
   interface:
+    listen_port: "54321"
     private_key: ""
-    listen_port: 54321
     address: 10.6.0.2
-    dns: [ 8.8.8.8, 8.8.4.4]
+    dns: [8.8.8.8, 8.8.4.4]
     post_up: "iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE; iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu"
     post_down: "iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE; iptables -D FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu"
     mtu: 1420
@@ -37,11 +35,12 @@ options:
     - public_key: ""
       pre_shared_key: ""
       endpoint: "xxxxxx.duckdns.com:51820"
-      allowed_ips: [ "10.6.0.0/24" ]
+      allowed_ips: ["10.6.0.0/24"]
       persistent_keep_alive: "25"
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   interface:
+    listen_port: str?
     private_key: password?
     address: str
     dns:
@@ -50,8 +49,7 @@ schema:
     post_down: str?
     mtu: int
   peers:
-    - host: str?
-      public_key: str?
+    - public_key: str?
       pre_shared_key: str?
       endpoint: str
       allowed_ips:
