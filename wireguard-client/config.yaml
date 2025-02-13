@@ -1,6 +1,6 @@
 ---
 name: WireGuard Client
-version: 0.1.02
+version: 0.1.03
 slug: wireguard_client
 description: Fast, modern, secure Wireguard tunnel (client)
 url: https://github.com/haflandy/addon-wireguard-client
