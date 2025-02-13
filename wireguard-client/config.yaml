@@ -55,4 +55,4 @@ schema:
       allowed_ips:
         - str
       persistent_keep_alive: int
-image: "haflandy/{arch}-addon-wireguard-client"
+image: "haflandy/{arch}-addon-wireguard-client:20250213-001"
